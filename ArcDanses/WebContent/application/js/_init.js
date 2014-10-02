@@ -6,11 +6,11 @@ var appliname = 'karuta';
 //----------------------------------
 var languages = [];
 languages [0] = 'en';
-//languages [1] = 'fr';
+languages [1] = 'fr';
 //languages [2] = 'ja';
 //----------------------------------
-var NONMULTILANGCODE = 0;  // default language if non-multilingual
-var LANGCODE = 0; //default value
+var NONMULTILANGCODE = 1;  // default language if non-multilingual
+var LANGCODE = 1; //default value
 var LANG = languages[LANGCODE]; //default value
 //----------------------------------
 var bckname = 'karuta';
