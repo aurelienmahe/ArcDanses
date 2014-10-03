@@ -1,8 +1,8 @@
 //----------------------------------
-var application_version = "1.0";
+var application_version = "0.9";
 var application_date = "2014-09-30";
 //----------------------------------
-var appliname = 'karuta';
+var appliname = 'ARCDANSE';
 //----------------------------------
 var languages = [];
 languages [0] = 'en';
