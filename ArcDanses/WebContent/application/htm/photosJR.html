@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Photographies | Jeanne Renaud</title>	
+	<link rel="stylesheet" href="../../other/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../other/css/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" href="../css/vues.css" />
+	<script src="../../other/js/jquery-1.10.2.js"></script>	
+</head>
+
+<body>
+
+	<div id="photosJR">
+		<h3 align='center'>Photographies donn&eacute;es par Jeanne Renaud</h3>
+		<div id="pageContent"><div style="text-align:center"><img src='../../karuta/img/ajax-loader.gif'><br><h4>Chargement des photos ...</h4></div></div>
+	</div>
+
+	<script language='javascript'>
+
+		$(document).ready(function() {
+			
+			var portfolioId = getURLParameter("id");
+			
+			$.ajax({
+				type : "GET",
+				dataType : "xml",
+				url : "../../../karuta-backend/rest/api/portfolios/portfolio/" + portfolioId + "?resources=true",
+				success : function(data) {
+					DisplayPhotographies($("#pageContent"), data);
+				}
+			});
+		});
+		
+		function getURLParameter(sParam) {
+
+			var sPageURL = window.location.search.substring(1);
+			var sURLVariables = sPageURL.split('&');
+			for ( var i = 0; i < sURLVariables.length; i++) {
+				var sParameterName = sURLVariables[i].split('=');
+				if (sParameterName[0] == sParam) {
+					return sParameterName[1];
+				}
+			}
+		}
+
+		function DisplayPhotographies(div, data) {
+			$(div).html("");
+			
+			var photos = {};		// unitId:  [contextId,titre]
+			
+			var metadataJeanne = $("asmStructure > metadata[semantictag='archivesperso']:first", data);
+			var structureJeanne = $(metadataJeanne).parent();
+			
+			var unitsPhoto = $("asmUnit:has(metadata[semantictag='photographie'])", structureJeanne);
+			for (var i = 0; i < $(unitsPhoto).length; ++i) {
+				
+				var unit = unitsPhoto[i];
+				var unitId = $(unit).attr("id");
+				
+				var contextId = $("asmResource[xsi_type='Image']", unit).attr("contextid");		// tient compte seulement de la première (recto)
+				
+				var titre = $("asmResource[xsi_type='nodeRes']:first > label[lang='fr']",unit).text();
+				photos[unitId] = [contextId,titre];			
+			}
+			
+ 			var tableau = $("<table></table>");
+			$(div).append(tableau);
+
+			var rangee = $("<tr></tr>");
+ 
+ 			var i = 0;
+ 			
+ 			for ( var j in photos) {	
+				var photoUnitId = j;
+				var photoContextId = photos[j][0];
+				var titrePhoto = photos[j][1];
+				
+				if (i>0 && i%5==0){
+					$(tableau).append(rangee);
+					rangee = $("<tr></tr>");
+				}
+				
+				$(rangee).append("<td><a href='photo.html?id=" + photoUnitId + "'><div>" +
+											"<p>" + titrePhoto + "</p>" +
+											"<img class='thumb' src='../../../karuta-backend/resources/resource/file/" + photoContextId + "' />" +
+									"</div></a></td>");
+				i++;
+			}
+ 			
+ 			$(tableau).append(rangee);
+		}
+ 	</script>
+</body>
+</html>

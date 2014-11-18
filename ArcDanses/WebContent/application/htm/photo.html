@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Photographies | Jeanne Renaud</title>	
+	<link rel="stylesheet" href="../../other/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../other/css/bootstrap-responsive.min.css" />	
+	<link rel="stylesheet" href="../css/vues.css" />
+	<script src="../../other/js/jquery-1.10.2.js"></script>
+	<script src="../js/utilsVues.js"></script>
+</head>
+
+<body>
+
+	<div id="photo">
+		<div id="pageContent"></div>
+	</div>
+
+	<script language='javascript'>
+
+		$(document).ready(function() {
+			
+			var unitId = getURLParameter("id");
+			
+			$.ajax({
+				type : "GET",
+				dataType : "xml",
+				url : "../../../karuta-backend/rest/api/nodes/node/" + unitId + "?resources=true",
+				success : function(data) {
+					DisplayPhotographie($("#pageContent"), data);
+				}
+			});
+		});
+		
+		
+
+		function DisplayPhotographie(div, data) {
+			
+			// titre ************************************ 
+			$(div).append(getTitre(data));		// appel a utilsVues.js 
+
+
+			// images ********************************** 
+			var resourcesImages = $("asmResource[xsi_type='Image']", data);
+			
+			for (var i = 0; i < resourcesImages.length; ++i) {
+				var resourceImage = resourcesImages[i];
+				var contextId = $(resourceImage).attr("contextid");
+				
+				var cote = "";
+				if (resourcesImages.length > 1) {
+					if (i==0) {
+						cote = "</br>&mdash;&nbsp;recto&nbsp;&mdash;"; 
+					} 	else { 
+						cote = "</br>&mdash;&nbsp;verso&nbsp;&mdash;"; 
+					}
+
+				}
+			
+				$(div).append("<p align='center'>" +
+										"<img src='../../../karuta-backend/resources/resource/file/" +contextId + "'/>" +
+										cote +
+									"</p></br>");
+			}
+			
+			// description *******************************  
+			$(div).append(getDescription(data));		// appel a utilsVues.js 
+			
+			// date document ****************************  
+			$(div).append(getDateDocument(data));
+
+			// lieu *************************************  
+			$(div).append(getLieu(data));
+
+			// contexte *******************************  
+			$(div).append(getContexte(data));
+
+			
+			// source ***********************************  
+			$(div).append(getSource(data));
+
+			// auteurs oeuvre **************************** 
+			$(div).append(getAuteursOeuvre(data));
+
+			
+			// actants ********************************** 
+			$(div).append(getActants(data));
+
+			// documents connexes ********** PAS TESTE *** 
+			$(div).append(getDocumentsConnexes(data));
+
+			// auteur document ************************** 
+			//$(div).append(getAuteurDocument(data));
+
+			// etat conservation **************************  
+			$(div).append(getEtatConservation(data));
+
+			// dimensions *******************************  
+			$(div).append(getDimensions(data));
+ 
+			// date archivage ****************************  
+			$(div).append(getDateArchivage(data));
+
+			// mots cles *********************************  
+			$(div).append(getMotsCles(data));
+
+			// droits *********************** PAS TESTE ***  
+			$(div).append(getDroits(data));
+
+			// lien ************************************** 
+			$(div).append("<p align='right'><a href='photosJR.html'>&mdash;&nbsp;retour &agrave; la liste&nbsp;&mdash;</a></p>");
+		}
+		
+	</script>
+ 	
+</body>
+</html>
