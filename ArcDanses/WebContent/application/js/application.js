@@ -58,7 +58,7 @@ function getNavBar(type,portfolioid,edit)
 	html += "			<span class='icon-bar'></span><span class='icon-bar'></span><span class='icon-bar'></span><span class='icon-bar'></span>";
 	html += "		</a>";
 	html += "		<div class='nav'>";
-	html += "			<a data-toggle='dropdown' class='brand dropdown-toggle' href='#'>ARCDANCE powered by Karuta</a>";
+	html += "			<a data-toggle='dropdown' class='brand dropdown-toggle' href='#'>ARC DANSE powered by Karuta</a>";
 //	html += "			<a data-toggle='dropdown' class='brand dropdown-toggle' href='#'><img style='margin-bottom:4px;' src='../../karuta/img/favicon.png'/> KARUTA beta</a>";
 	html += "			<ul style='padding:5px;' class='dropdown-menu versions'>";
 	html += "				<li><b>Versions</b></li>";
@@ -112,8 +112,8 @@ function getNavBar(type,portfolioid,edit)
 		html += "			<ul class='nav'>";
 		html += "				<li class='dropdown'><a data-toggle='dropdown' class='dropdown-toggle' href='#'>Actions<b class='caret'></b></a>";
 		html += "					<ul class='dropdown-menu'>";
-		html += "						<li><a href='../../karuta/htm/list.htm?lang="+LANG+"'>"+karutaStr[LANG]['list_portfolios']+"</a></li>";
-		html += "						<li><a href='../../karuta/htm/listUsers.htm?lang="+LANG+"'>"+karutaStr[LANG]['list_users']+"</a></li>";
+		html += "						<li><a href='../../application/htm/list.htm?lang="+LANG+"'>"+karutaStr[LANG]['list_portfolios']+"</a></li>";
+		html += "						<li><a href='../../application/htm/listUsers.htm?lang="+LANG+"'>"+karutaStr[LANG]['list_users']+"</a></li>";
 //		html += "						<li><a href='../../karuta/htm/createBatchAccounts.htm?lang="+LANG+"'>"+karutaStr[LANG]['batch']+"</a></li>";
 //		html += "						<li><a href='../../karuta/htm/listRoles.htm'>"+karutaStr[LANG]['list_roles']+"</a></li>";
 //		html += "						<li><a href='../../karuta/htm/listGroups.htm'>"+karutaStr[LANG]['list_groups']+"</a></li>";
@@ -129,8 +129,8 @@ function getNavBar(type,portfolioid,edit)
 			html += "			<ul class='nav'>";
 			html += "				<li class='dropdown'><a data-toggle='dropdown' class='dropdown-toggle' href='#'>Mode<b class='caret'></b></a>";
 			html += "					<ul class='dropdown-menu'>";
-			html += "						<li><a href='../../karuta/htm/main.htm?id="+portfolioid+"&edit="+edit+"'>standard</a></li>";
-			html += "						<li><a href='../../karuta/htm/main.htm?id="+portfolioid+"&display_type=header&edit="+edit+"''>header</a></li>";
+			html += "						<li><a href='../../application/htm/main.htm?id="+portfolioid+"&edit="+edit+"'>standard</a></li>";
+			html += "						<li><a href='../../application/htm/main.htm?id="+portfolioid+"&display_type=header&edit="+edit+"''>header</a></li>";
 			html += "					</ul>";
 			html += "				</li>";
 			html += "			</ul>";
